@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>נשאת גאנם - תכנון פנסיוני ופיננסי מתקדם</title>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        :root {
+            --primary: #1B2947;
+            --accent: #FE6901;
+            --whatsapp: #25D567;
+            --bg-light: #f8fafc;
+            --text-dark: #1B2947;
+            --gray: #838383;
+            --card-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-in { animation: fadeInUp 0.6s ease forwards; }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { 
+            font-family: 'Assistant', sans-serif; 
+            background: var(--bg-light); 
+            color: var(--text-dark); 
+            margin: 0; padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #0d1526 100%);
+            color: white;
+            padding: 60px 20px 90px;
+            text-align: center;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+        }
+
+        .profile-img {
+            width: 100px; height: 100px;
+            background: white;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 45px; color: var(--primary);
+            border: 4px solid var(--accent);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .action-bar {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 10px; max-width: 500px;
+            margin: -45px auto 30px; padding: 0 15px;
+        }
+
+        .action-btn {
+            background: white; border-radius: 15px;
+            padding: 15px 5px; text-align: center;
+            text-decoration: none; color: var(--primary);
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            display: flex; flex-direction: column; align-items: center; gap: 8px;
+        }
+        .action-btn i { font-size: 22px; color: var(--accent); }
+        .action-btn span { font-size: 11px; font-weight: 700; }
+
+        .save-contact {
+            grid-column: span 4; background: var(--accent); color: white;
+            padding: 18px; border-radius: 15px; font-weight: 800;
+            font-size: 18px; box-shadow: 0 5px 15px rgba(254, 105, 1, 0.4);
+        }
+
+        .container { max-width: 550px; margin: 0 auto; padding: 0 20px 40px; }
+
+        .tabs-nav {
+            display: flex; gap: 8px; overflow-x: auto;
+            padding: 10px 0 20px; scrollbar-width: none;
+        }
+        .tabs-nav::-webkit-scrollbar { display: none; }
+
+        .tab-trigger {
+            background: #e2e8f0; border: none; padding: 10px 20px;
+            border-radius: 25px; white-space: nowrap; font-weight: 700;
+            color: var(--primary); cursor: pointer; transition: 0.3s;
+        }
+        .tab-trigger.active { background: var(--primary); color: white; }
+
+        .card {
+            background: white; padding: 25px; border-radius: 25px;
+            box-shadow: var(--card-shadow); margin-bottom: 25px;
+            border-top: 4px solid var(--accent);
+            display: none;
+        }
+        .card.active { display: block; animation: fadeInUp 0.5s ease; }
+
+        label { display: block; font-size: 13px; font-weight: 800; margin: 15px 0 5px; color: var(--primary); }
+        input, select {
+            width: 100%; padding: 14px; border: 1px solid #e2e8f0;
+            border-radius: 12px; font-size: 16px; background: #f8fafc;
+        }
+
+        .calc-trigger {
+            width: 100%; padding: 16px; background: var(--primary);
+            color: white; border: none; border-radius: 12px;
+            font-size: 17px; font-weight: 800; cursor: pointer; margin-top: 10px;
+        }
+
+        .result-box {
+            margin-top: 20px; padding: 20px; background: #f0fdf4;
+            border-radius: 15px; border: 1px solid var(--whatsapp);
+            text-align: center; display: none;
+        }
+        .result-price { font-size: 32px; color: var(--whatsapp); font-weight: 900; margin: 5px 0; }
+
+        .whatsapp-send {
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            background: var(--whatsapp); color: white; text-decoration: none;
+            padding: 14px; border-radius: 12px; margin-top: 15px; font-weight: 700;
+        }
+
+        .feature-grid { display: grid; gap: 15px; margin-top: 30px; }
+        .feature-item {
+            background: white; padding: 20px; border-radius: 20px;
+            border-right: 5px solid var(--accent);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+        }
+        .feature-item i { color: var(--accent); font-size: 24px; margin-bottom: 10px; }
+        .feature-item h4 { margin: 0 0 5px; color: var(--primary); }
+        .feature-item p { margin: 0; font-size: 14px; color: var(--gray); }
+
+        .legal {
+            font-size: 11px; color: var(--gray); text-align: justify;
+            margin-top: 30px; line-height: 1.4; padding: 15px; background: #eee; border-radius: 10px;
+        }
+
+        footer {
+            background: var(--primary); color: white;
+            padding: 40px 20px; text-align: center;
+            border-top-left-radius: 40px; border-top-right-radius: 40px;
+        }
+        .footer-cta {
+            background: var(--accent); color: white; padding: 15px 30px;
+            border-radius: 30px; text-decoration: none; font-weight: 800;
+            display: inline-block; margin-top: 15px;
+        }
+
+        .chart-container { position: relative; height: 200px; width: 100%; margin-top: 15px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="profile-area animate-in">
+            <div class="profile-img"><i class="fas fa-chart-line"></i></div>
+            <h1>נשאת גאנם</h1>
+            <div class="slogan">הביטחון הכלכלי שלך מתחיל בתכנון חכם</div>
+        </div>
+    </header>
+
+    <div class="action-bar animate-in">
+        <a href="https://wa.me/972525810047" class="action-btn">
+            <i class="fab fa-whatsapp"></i><span>WhatsApp</span>
+        </a>
+        <a href="tel:0525810047" class="action-btn">
+            <i class="fas fa-phone"></i><span>התקשר</span>
+        </a>
+        <a href="mailto:nashat.fg@gmail.com" class="action-btn">
+            <i class="fas fa-envelope"></i><span>דוא"ל</span>
+        </a>
+        <a href="https://waze.com/ul?ll=32.87975,35.426556&navigate=yes" class="action-btn">
+            <i class="fab fa-waze"></i><span>ניווט</span>
+        </a>
+        <a href="#" class="action-btn save-contact" onclick="downloadVCard()">
+            <i class="fas fa-user-plus"></i> שמירת איש קשר
+        </a>
+    </div>
+
+    <div class="container">
+        <div class="tabs-nav animate-in">
+            <button class="tab-trigger active" onclick="showTab('risk', this)">ביטוח חיים</button>
+            <button class="tab-trigger" onclick="showTab('invest', this)">חיסכון והשקעה</button>
+            <button class="tab-trigger" onclick="showTab('pension', this)">דמי ניהול</button>
+            <button class="tab-trigger" onclick="showTab('child', this)">חיסכון לילד</button>
+            <button class="tab-trigger" onclick="showTab('admin', this)">תפעול פנסיוני</button>
+        </div>
+
+        <div id="tab-risk" class="card active">
+            <h3>סימולטור ביטוח חיים (ריסק)</h3>
+            <label>גיל המבוטח (18-79):</label>
+            <input type="number" id="risk-age" placeholder="הזן גיל">
+            <label>מצב עישון:</label>
+            <select id="risk-smoker">
+                <option value="no">לא מעשן</option>
+                <option value="yes">מעשן (כולל סיגריות/נרגילה/אלקטרוני)</option>
+            </select>
+            <label>סכום ביטוח מבוקש (₪):</label>
+            <select id="risk-sum">
+                <option value="1000000">1,000,000 ₪</option>
+                <option value="500000">500,000 ₪</option>
+            </select>
+            <button class="calc-trigger" onclick="calcRisk()">חשב פרמיה שנה א'</button>
+            <div id="res-risk" class="result-box">
+                <p>עלות משוערת לחודש (שנה א'):</p>
+                <div class="result-price">₪ <span id="out-risk">0</span></div>
+                <p style="font-size: 11px; color: #d63031; font-weight: bold; margin-top: 10px;">
+                    * הפרמיה המוצגת הינה לשנה הראשונה בלבד. עלות הביטוח משתנה ומתייקרת מדי שנה בהתאם לגיל המבוטח והצמדה למדד.
+                </p>
+                <a id="wa-risk" class="whatsapp-send" target="_blank"><i class="fab fa-whatsapp"></i> קבל הצעה מפורטת</a>
+            </div>
+        </div>
+
+        <div id="tab-invest" class="card">
+            <h3>מחשבון עושר עתידי ויזואלי</h3>
+            <label>הפקדה חודשית (₪):</label>
+            <input type="number" id="inv-val" value="1000">
+            <label>תקופה (שנים):</label>
+            <input type="number" id="inv-years" value="15">
+            <button class="calc-trigger" onclick="calcInvest()">חשב תוצאה וגרף</button>
+            <div id="res-invest" class="result-box" style="background: white;">
+                <p>צבירה צפויה (7% תשואה):</p>
+                <div class="result-price">₪ <span id="out-inv-sum"></span></div>
+                <div class="chart-container"><canvas id="investChart"></canvas></div>
+                <a id="wa-invest" class="whatsapp-send" target="_blank"><i class="fab fa-whatsapp"></i> בוא נתחיל להשקיע</a>
+            </div>
+        </div>
+
+        <div id="tab-pension" class="card">
+            <h3>אופטימיזציה של דמי ניהול</h3>
+            <label>צבירה אישית (₪):</label>
+            <input type="number" id="p-bal" placeholder="0">
+            <label>צבירת בן/בת זוג (₪) - אופציונלי:</label>
+            <input type="number" id="p-spouse" value="0">
+            <button class="calc-trigger" onclick="calcPension()">בדוק פוטנציאל הוזלה</button>
+            <div id="res-pension" class="result-box">
+                <p id="p-type-label" style="font-weight: bold;"></p>
+                <p>דמי ניהול יעד צפויים:</p>
+                <div class="result-price"><span id="out-p-dep"></span>% / <span id="out-p-acc"></span>%</div>
+                <a id="wa-pension" class="whatsapp-send" target="_blank"><i class="fab fa-whatsapp"></i> תשיג לי את התנאים האלו</a>
+            </div>
+        </div>
+
+        <div id="tab-child" class="card">
+            <h3>השוואת חיסכון לכל ילד</h3>
+            <p style="font-size: 13px;">לפי הפקדה מקסימלית של 114 ₪ בחודש</p>
+            <label>גיל הילד כיום:</label>
+            <input type="number" id="child-age" placeholder="0-18">
+            <button class="calc-trigger" onclick="calcChild()">השווה מסלולים</button>
+            <div id="res-child" class="result-box">
+                <p>צבירה משוערת בגיל 18:</p>
+                <div id="out-child-details" style="text-align: right; font-size: 14px;"></div>
+                <a id="wa-child" class="whatsapp-send" target="_blank"><i class="fab fa-whatsapp"></i> העבר את הילד למסלול מנייתי</a>
+            </div>
+        </div>
+
+        <div id="tab-admin" class="card">
+            <h3>ניהול הסדר פנסיוני לעסק</h3>
+            <label>מספר עובדים בעסק:</label>
+            <input type="number" id="admin-staff" placeholder="למשל: 12">
+            <button class="calc-trigger" onclick="calcAdmin()">חשב עלות תפעול</button>
+            <div id="res-admin" class="result-box">
+                <p>עלות חודשית מומלצת:</p>
+                <div class="result-price">₪ <span id="out-admin"></span></div>
+                <p style="font-size: 12px;">+ עלות הקמה חד פעמית: 180 ₪</p>
+                <a id="wa-admin" class="whatsapp-send" target="_blank"><i class="fab fa-whatsapp"></i> שלח לי הצעה למעסיק</a>
+            </div>
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature-item">
+                <i class="fas fa-shield-halved"></i>
+                <h4>בדיקת כפילויות ביטוחיות</h4>
+                <p>נעבור על התיק שלך ונחסוך מאות שקלים על ביטוחים מיותרים שמשלמים פעמיים.</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-hand-holding-dollar"></i>
+                <h4>אופטימיזציית דמי ניהול</h4>
+                <p>הכוח של הכסף שלך בידיים שלך. נוריד את דמי הניהול למקסימום האפשרי בשוק.</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-user-check"></i>
+                <h4>ליווי אישי ומקצועי</h4>
+                <p>אצלי אתם לא עוד מספר במוקד. אני השותף שלכם לדרך, זמין לכל שאלה.</p>
+            </div>
+        </div>
+
+        <div class="legal">
+            <strong>גילוי נאות והבהרה משפטית:</strong>
+            המידע המוצג בסימולטור זה מיועד למטרות אינפורמטיביות והמחשה בלבד, ואינו מהווה ייעוץ השקעות, ייעוץ פנסיוני או שיווק השקעות/פנסיוני כהגדרתם בחוק. התוצאות מבוססות על נתוני תעריפי בסיס והנחות היפותטיות. המחיר המוצג מתייחס לשנה הראשונה בלבד והפרמיה צפויה להשתנות מדי שנה בהתאם לגיל המבוטח ומדד המחירים לצרכן.
+        </div>
+    </div>
+
+    <footer>
+        <h3>מוכנים לקחת שליטה על העתיד?</h3>
+        <p>פגישת אבחון ראשונית ללא עלות וללא התחייבות</p>
+        <a href="https://wa.me/972525810047?text=שלום נשאת, אני רוצה לתאם פגישת אבחון פיננסי" class="footer-cta">בואו נתאם פגישה!</a>
+        <div style="margin-top: 20px; font-size: 13px; opacity: 0.7;">
+            &copy; 2026 נשאת גאנם - תכנון פיננסי ופנסיוני
+        </div>
+    </footer>
+
+    <script>
+        const PHONE = "972525810047";
+        let myChart = null;
+
+        // טבלאות נתונים מדויקות
+        const table_1M_no = {18: 55.36, 19: 55.36, 20: 55.36, 21: 55.36, 22: 55.36, 23: 55.36, 24: 55.36, 25: 55.97, 26: 55.97, 27: 55.97, 28: 55.97, 29: 56.58, 30: 56.58, 31: 57.18, 32: 58.40, 33: 60.00, 34: 61.67, 35: 64.17, 36: 68.33, 37: 71.67, 38: 76.67, 39: 83.33, 40: 88.33, 41: 97.65, 42: 104.74, 43: 112.88, 44: 121.93, 45: 132.30, 46: 144.12, 47: 157.50, 48: 172.59, 49: 189.92, 50: 209.34, 51: 231.53, 52: 256.59, 53: 285.07, 54: 299.86, 55: 314.65, 56: 351.52, 57: 393.28, 58: 440.77, 59: 494.44, 60: 555.33, 61: 624.28, 62: 702.45, 63: 791.12, 64: 891.33, 65: 1004.97, 66: 1133.65, 67: 1279.25, 68: 1444.10, 69: 1630.65, 70: 1841.70, 71: 2080.40, 72: 2350.25, 73: 2655.21, 74: 2999.73, 75: 3388.93, 76: 3828.19, 77: 4323.67, 78: 4882.39, 79: 5511.92};
+        const table_1M_yes = {18: 77.87, 19: 77.87, 20: 77.87, 21: 77.87, 22: 78.47, 23: 78.47, 24: 78.47, 25: 79.08, 26: 79.69, 27: 80.30, 28: 80.30, 29: 80.91, 30: 80.91, 31: 81.52, 32: 83.95, 33: 86.99, 34: 90.64, 35: 95.51, 36: 102.20, 37: 110.72, 38: 118.63, 39: 130.18, 40: 142.35, 41: 156.34, 42: 173.98, 43: 192.23, 44: 214.74, 45: 240.29, 46: 267.67, 47: 299.30, 48: 336.41, 49: 376.56, 50: 422.18, 51: 470.85, 52: 471.45, 53: 476.62, 54: 476.62, 55: 503.07, 56: 551.67, 57: 614.03, 58: 675.52, 59: 762.48, 60: 858.03, 61: 981.84, 62: 1104.11, 63: 1238.39, 64: 1374.22, 65: 1543.31, 66: 1715.74, 67: 1931.84, 68: 2158.64, 69: 2349.51, 70: 2968.65, 71: 3388.44, 72: 3886.39, 73: 4427.36, 74: 5015.23, 75: 5541.61, 76: 5788.45, 77: 6354.52, 78: 6966.31, 79: 7627.22};
+        const table_500K_no = {18: 27.68, 19: 27.68, 20: 27.68, 21: 27.68, 22: 27.68, 23: 27.68, 24: 27.68, 25: 27.98, 26: 27.98, 27: 27.98, 28: 27.98, 29: 28.29, 30: 28.29, 31: 28.59, 32: 29.20, 33: 30.00, 34: 30.83, 35: 32.08, 36: 34.17, 37: 35.83, 38: 38.33, 39: 41.67, 40: 44.17, 41: 48.83, 42: 52.37, 43: 56.44, 44: 60.97, 45: 66.15, 46: 72.06, 47: 78.75, 48: 86.30, 49: 94.96, 50: 104.67, 51: 115.76, 52: 128.30, 53: 142.54, 54: 149.93, 55: 157.33, 56: 175.76, 57: 196.64, 58: 220.39, 59: 247.22, 60: 277.67, 61: 312.14, 62: 351.23, 63: 395.56, 64: 445.67, 65: 502.49, 66: 566.83, 67: 639.63, 68: 722.05, 69: 815.33, 70: 920.85, 71: 1040.20, 72: 1175.13, 73: 1327.61, 74: 1499.87, 75: 1694.47, 76: 1914.09, 77: 2161.83, 78: 2441.19, 79: 2755.96};
+        const table_500K_yes = {18: 38.93, 19: 38.93, 20: 38.93, 21: 38.93, 22: 39.24, 23: 39.24, 24: 39.24, 25: 39.54, 26: 39.85, 27: 40.15, 28: 40.15, 29: 40.45, 30: 40.45, 31: 40.76, 32: 41.97, 33: 43.50, 34: 45.32, 35: 47.75, 36: 51.10, 37: 55.36, 38: 59.31, 39: 65.09, 40: 71.17, 41: 78.17, 42: 86.99, 43: 96.12, 44: 107.37, 45: 120.15, 46: 133.83, 47: 149.65, 48: 168.20, 49: 188.28, 50: 211.09, 51: 235.42, 52: 235.72, 53: 238.31, 54: 238.31, 55: 251.54, 56: 275.84, 57: 307.02, 58: 337.76, 59: 381.24, 60: 429.02, 61: 490.92, 62: 552.06, 63: 619.19, 64: 687.11, 65: 771.65, 66: 857.87, 67: 965.92, 68: 1079.32, 69: 1174.75, 70: 1484.32, 71: 1694.22, 72: 1943.20, 73: 2213.68, 74: 2507.62, 75: 2770.81, 76: 2894.23, 77: 3177.26, 78: 3483.16, 79: 3813.61};
+
+        function showTab(id, btn) {
+            document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab-trigger').forEach(b => b.classList.remove('active'));
+            document.getElementById('tab-' + id).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        function calcRisk() {
+            const age = parseInt(document.getElementById('risk-age').value);
+            const smoker = document.getElementById('risk-smoker').value;
+            const sum = parseInt(document.getElementById('risk-sum').value);
+            
+            if(!age || age < 18 || age > 79) { alert("אנא הזן גיל תקין (18-79)"); return; }
+
+            let baseRate = 0;
+            if (sum === 1000000) {
+                baseRate = (smoker === 'yes') ? table_1M_yes[age] : table_1M_no[age];
+            } else {
+                baseRate = (smoker === 'yes') ? table_500K_yes[age] : table_500K_no[age];
+            }
+
+            let disc = 0;
+            if (age < 30) {
+                disc = 30; 
+            } else {
+                if (sum === 1000000) {
+                    disc = 65; 
+                } else {
+                    disc = 50; 
+                }
+            }
+
+            const finalPrice = baseRate * (1 - disc/100);
+
+            document.getElementById('out-risk').innerText = finalPrice.toFixed(2);
+            document.getElementById('res-risk').style.display = 'block';
+            document.getElementById('wa-risk').href = `https://wa.me/${PHONE}?text=${encodeURIComponent("שלום נשאת, קיבלתי הצעה בסימולטור לביטוח חיים: גיל " + age + ", סכום " + sum.toLocaleString() + " ש\"ח, מצב " + (smoker==='yes'?'מעשן':'לא מעשן') + ". המחיר: " + finalPrice.toFixed(2) + " ש\"ח.")}`;
+        }
+
+        function calcInvest() {
+            const val = parseFloat(document.getElementById('inv-val').value);
+            const years = parseInt(document.getElementById('inv-years').value);
+            const r = 0.07 / 12;
+            let dataPoints = [];
+            let labels = [];
+
+            for(let i=0; i <= years; i++) {
+                let fv = val * ((Math.pow(1 + r, i * 12) - 1) / r);
+                dataPoints.push(Math.round(fv));
+                labels.push("שנה " + i);
+            }
+
+            const finalFV = dataPoints[dataPoints.length - 1];
+            document.getElementById('out-inv-sum').innerText = finalFV.toLocaleString();
+            document.getElementById('res-invest').style.display = 'block';
+
+            if(myChart) myChart.destroy();
+            myChart = new Chart(document.getElementById('investChart'), {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{ label: 'צבירה בש"ח', data: dataPoints, borderColor: '#FE6901', tension: 0.3, fill: true, backgroundColor: 'rgba(254,105,1,0.1)' }]
+                },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
+            document.getElementById('wa-invest').href = `https://wa.me/${PHONE}?text=${encodeURIComponent("מעוניין להשקיע " + val + " שח ל-" + years + " שנים")}`;
+        }
+
+        function calcPension() {
+            const b = parseFloat(document.getElementById('p-bal').value) || 0;
+            const s = parseFloat(document.getElementById('p-spouse').value) || 0;
+            const total = b + s;
+            let d = 1.8, a = 0.09;
+            if(total >= 500000) { d = 1.75; a = 0.08; }
+            if(total >= 1000000) { d = 1.6; a = 0.07; }
+            
+            document.getElementById('p-type-label').innerText = (s > 0) ? "בדיקה לפי תא משפחתי (זוגי)" : "בדיקה אישית";
+            document.getElementById('out-p-dep').innerText = d;
+            document.getElementById('out-p-acc').innerText = a;
+            document.getElementById('res-pension').style.display = 'block';
+            document.getElementById('wa-pension').href = `https://wa.me/${PHONE}?text=${encodeURIComponent("היי, מעוניין בהוזלת דמי ניהול לצבירה של " + total)}`;
+        }
+
+        function calcChild() {
+            const age = parseInt(document.getElementById('child-age').value);
+            if(isNaN(age) || age > 18) return;
+            const rem = 18 - age;
+            const fv = (r) => {
+                const mR = r / 12;
+                return Math.round(114 * ((Math.pow(1 + mR, rem * 12) - 1) / mR)).toLocaleString();
+            };
+            document.getElementById('out-child-details').innerHTML = `
+                <div>בנק (4%): ₪ ${fv(0.04)}</div>
+                <div>מסלול מאוזן (6%): ₪ ${fv(0.06)}</div>
+                <div style="color:var(--whatsapp)">מסלול מנייתי (10%): ₪ ${fv(0.10)}</div>
+            `;
+            document.getElementById('res-child').style.display = 'block';
+            document.getElementById('wa-child').href = `https://wa.me/${PHONE}?text=מעוניין להעביר את החיסכון של הילד למסלול מנייתי`;
+        }
+
+        function calcAdmin() {
+            const staff = parseInt(document.getElementById('admin-staff').value);
+            if(!staff) return;
+            let price = staff <= 5 ? 149 : (staff <= 10 ? 189 : (staff <= 20 ? 250 : staff * 25));
+            document.getElementById('out-admin').innerText = price;
+            document.getElementById('res-admin').style.display = 'block';
+            document.getElementById('wa-admin').href = `https://wa.me/${PHONE}?text=מעוניין בהצעה לתפעול פנסיוני עבור ${staff} עובדים`;
+        }
+
+        function downloadVCard() {
+            const vcard = "BEGIN:VCARD\nVERSION:3.0\nFN:נשאת גאנם\nTEL:0525810047\nEMAIL:nashat.fg@gmail.com\nEND:VCARD";
+            const blob = new Blob([vcard], { type: "text/vcard" });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url; a.download = 'Nashat_Ganem.vcf'; a.click();
+        }
+    </script>
+</body>
+</html>
