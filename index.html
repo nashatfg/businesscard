@@ -98,7 +98,11 @@ body {
   font-weight: 600;
   color: #f5c842;
   letter-spacing: 0.03em;
-  margin-bottom: 28px;
+  margin-bottom: 16px;
+}
+@media (max-width: 480px) {
+  .hero-eyebrow { display: none; }
+  .hero-review { margin-bottom: 20px; }
 }
 
 .hero-eyebrow-dot {
@@ -1034,6 +1038,38 @@ input[type="range"] {
 }
 
 
+
+/* ── PAIN BRIDGE ── */
+.pain-bridge {
+  background: var(--cream-dark);
+  padding: 0 24px 32px;
+}
+.pain-bridge-inner {
+  max-width: 700px;
+  margin: 0 auto;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-right: 4px solid var(--gold);
+  border-radius: 12px;
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.pain-bridge-icon {
+  width: 36px; height: 36px; flex-shrink: 0;
+  background: var(--navy);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold); font-size: 14px;
+}
+.pain-bridge-inner p {
+  font-size: 15px; font-weight: 600;
+  color: var(--text); line-height: 1.5; margin: 0;
+}
+
+/* ── CRED-ITEM שיפור ── */
+.cred-item span { line-height: 1.4; }
 </style>
 </head>
 <body>
@@ -1044,18 +1080,19 @@ input[type="range"] {
   <div class="hero-glow"></div>
   <div class="hero-inner">
 
+    <!-- Eyebrow: נסתר על מובייל, שמור ב-DOM לגוגל -->
     <div class="hero-eyebrow">
       <span class="hero-eyebrow-dot"></span>
       תכנון פנסיוני עצמאי למשפחות, מורים, רופאים ועובדי מדינה
     </div>
 
-    <!-- Social proof pill -->
+    <!-- Social proof pill — ראשון ויזואלית, לפני H1 -->
     <div class="hero-review">
       <div class="review-avatar-small">ס.ב</div>
       <div class="review-text">
         <div class="review-stars">★★★★★</div>
-        <div class="review-quote">גיליתי שאני מפסיד/ה +₪66,027 בדמי ניהול</div>
-        <div class="review-name">ס.ב – בית ספר מחוננים, ריינה</div>
+        <div class="review-quote">+₪66,027 — גילינו בבדיקה אחת</div>
+        <div class="review-name">ס.ב · מורה · בית ספר מחוננים, ריינה</div>
       </div>
     </div>
 
@@ -1191,6 +1228,14 @@ input[type="range"] {
     </div>
   </div>
 </section>
+
+<!-- BRIDGE -->
+<div class="pain-bridge">
+  <div class="pain-bridge-inner">
+    <span class="pain-bridge-icon"><i class="fas fa-arrow-down"></i></span>
+    <p>אז מה קורה בפועל כשמישהו בודק? הנה מה שגילינו אצל מורה מריינה — בבדיקה אחת.</p>
+  </div>
+</div>
 
 <!-- ══════════════════════════════ CASE STUDY CARD ══════════════════════════════ -->
 <section class="viz-section">
@@ -1678,9 +1723,9 @@ input[type="range"] {
         מתמחה בעובדי מגזר ציבורי, חינוך ורפואה – כי יש להם תנאים ייחודיים שדורשים ידע עמוק.
       </p>
       <div class="about-creds">
-        <div class="cred-item"><i class="fas fa-certificate"></i> רישיון ייעוץ פנסיוני תקף</div>
-        <div class="cred-item"><i class="fas fa-scale-balanced"></i> אנליסט נתונים ופיננסים מוסמך</div>
-        <div class="cred-item"><i class="fas fa-building-columns"></i> עובד מול כל קרנות הפנסיה הגדולות</div>
+        <div class="cred-item"><i class="fas fa-shield-check"></i> <span>רישיון סוכן ביטוח פנסיוני מס' <strong>L-00135820</strong> — רשות שוק ההון, בתוקף עד 12/2026</span></div>
+        <div class="cred-item"><i class="fas fa-scale-balanced"></i> מתמחה בניתוח נתוני פנסיה והשוואת מסלולים</div>
+        <div class="cred-item"><i class="fas fa-building-columns"></i> עובד מול: <strong>מגדל · כלל · הראל · מנורה · פניקס · מיטב · אנליסט · מור · אלטשולר שחם</strong></div>
         <div class="cred-item"><i class="fas fa-phone-volume"></i> <a href="tel:0525810047" style="color:var(--text); text-decoration:none;">052-581-0047</a></div>
       </div>
     </div>
@@ -1823,6 +1868,8 @@ function calcPensionCompare() {
   document.getElementById('out-rates-prop').innerText = 'דמי ניהול יורדים לפי צבירה';
   document.getElementById('out-p-diff').innerText = diff > 0 ? '+\u20aa ' + diff.toLocaleString('he-IL') : '\u20aa 0';
   document.getElementById('res-pension').style.display = 'block';
+  const ns = document.getElementById('pension-next-step');
+  if(ns) ns.style.display = 'block';
   const msg = `\u05d4\u05d9\u05d9 \u05e0\u05e9\u05d0\u05ea, \u05d1\u05d9\u05e6\u05e2\u05ea\u05d9 \u05e1\u05d9\u05de\u05d5\u05dc\u05e6\u05d9\u05d9\u05ea \u05e4\u05e0\u05e1\u05d9\u05d4 \u05d5\u05d2\u05d9\u05dc\u05d9\u05ea\u05d9 \u05e9\u05d0\u05e0\u05d9 \u05d9\u05db\u05d5\u05dc \u05dc\u05d4\u05e8\u05d5\u05d5\u05d9\u05d7 \u05e2\u05d5\u05d3 ${diff.toLocaleString('he-IL')} \u05e9"\u05d7. \u05d0\u05e9\u05de\u05d7 \u05dc\u05d4\u05e6\u05e2\u05d4 \u05de\u05d3\u05d5\u05d9\u05e7\u05ea!`;
   document.getElementById('wa-pension-link').href = `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`;
 }
