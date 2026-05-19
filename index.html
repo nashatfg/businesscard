@@ -366,31 +366,48 @@ body {
   background: linear-gradient(160deg, #1e2235 0%, #0f1420 100%);
   border: 1px solid rgba(255,255,255,0.1);
   border-right: 4px solid var(--gold);
-  border-radius: 12px;
-  padding: 26px 22px;
+  border-radius: 14px;
+  padding: 0;
+  overflow: hidden;
 }
-
-.pain-number {
+.pain-card-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 22px 20px;
+}
+.pain-badge {
+  flex-shrink: 0;
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: rgba(245,200,66,0.15);
+  border: 1px solid rgba(245,200,66,0.3);
+  display: flex; align-items: center; justify-content: center;
   font-family: 'Frank Ruhl Libre', serif;
-  font-size: 48px;
-  font-weight: 900;
-  color: rgba(245,200,66,0.15);
-  line-height: 1;
-  margin-bottom: 8px;
+  font-size: 18px; font-weight: 900;
+  color: #f5c842;
 }
+.pain-content { flex: 1; }
 .pain-title {
   font-size: 17px;
-  font-weight: 700;
+  font-weight: 800;
   color: #f0f4ff;
+  margin-bottom: 2px;
+  line-height: 1.2;
+}
+.pain-sub {
+  font-size: 13px;
+  color: rgba(200,216,240,0.65);
   margin-bottom: 8px;
-  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+  font-weight: 400;
 }
 .pain-desc {
   font-size: 14px;
   color: #c8d8f0;
-  line-height: 1.7;
+  line-height: 1.65;
   font-weight: 400;
 }
+.pain-number { display: none; }
 
 /* ── CASE STUDY CARD (compact – committee recommendation) ── */
 .viz-section { padding: 80px 24px; background: var(--cream-dark); }
@@ -421,8 +438,11 @@ body {
 .case-role { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
 .case-badges { display: flex; gap: 6px; flex-wrap: wrap; }
 .case-badge {
-  font-size: 11px; padding: 3px 10px; border-radius: 20px;
-  border: 1px solid rgba(201,168,76,0.35); color: var(--gold-light);
+  font-size: 12px; padding: 5px 12px; border-radius: 20px;
+  border: 1px solid rgba(245,200,66,0.5);
+  color: #f5c842;
+  font-weight: 600;
+  background: rgba(245,200,66,0.08);
 }
 
 .case-body { padding: 28px; }
@@ -442,7 +462,7 @@ body {
 .trio-box.trio-bad { background: #fef3f2; border-color: #fbc9c6; }
 .trio-box.trio-good { background: #f0faf4; border-color: #9dd6b8; }
 .trio-label { font-size: 12px; font-weight: 700; color: var(--muted); margin-bottom: 6px; }
-.trio-amount { font-family: 'Frank Ruhl Libre', serif; font-size: clamp(18px,3.5vw,26px); font-weight: 700; margin-bottom: 4px; }
+.trio-amount { font-family: 'Frank Ruhl Libre', serif; font-size: clamp(24px,5vw,34px); font-weight: 900; margin-bottom: 4px; }
 .trio-amount.bad { color: var(--red); }
 .trio-amount.good { color: var(--green); }
 .trio-fee { font-size: 11px; font-weight: 600; margin-bottom: 3px; }
@@ -1123,26 +1143,51 @@ input[type="range"] {
     <p class="section-sub" style="margin-bottom: 48px;">ולא מדובר ברשלנות – פשוט אף אחד לא הסביר להם את זה.</p>
 
     <div class="pain-grid">
+
       <div class="pain-card">
-        <div class="pain-number">01</div>
-        <div class="pain-title">דמי ניהול גבוהים שמתחפשים לנורמה</div>
-        <div class="pain-desc">ההפרש בין 2% ל-1.5% נשמע קטן. על פני 25 שנה זה עשרות אלפי שקלים שנעלמים.</div>
+        <div class="pain-card-inner">
+          <div class="pain-badge">01</div>
+          <div class="pain-content">
+            <div class="pain-title">דמי ניהול גבוהים</div>
+            <div class="pain-sub">שמתחפשים לנורמה</div>
+            <div class="pain-desc">הפרש של 0.5% בדמי ניהול = <strong style="color:#f5c842;">עשרות אלפי ₪</strong> לאורך 25 שנה.</div>
+          </div>
+        </div>
       </div>
+
       <div class="pain-card">
-        <div class="pain-number">02</div>
-        <div class="pain-title">ביטוח כפול שאתה משלם עליו פעמיים</div>
-        <div class="pain-desc">כיסוי אובדן כושר עבודה בפנסיה + פוליסה פרטית – לפעמים אחד מהם מיותר לחלוטין.</div>
+        <div class="pain-card-inner">
+          <div class="pain-badge">02</div>
+          <div class="pain-content">
+            <div class="pain-title">ביטוח כפול</div>
+            <div class="pain-sub">משלמים פעמיים על אותו כיסוי</div>
+            <div class="pain-desc">אובדן כושר עבודה בפנסיה + פוליסה פרטית — <strong style="color:#f5c842;">אחד מהם מיותר.</strong></div>
+          </div>
+        </div>
       </div>
+
       <div class="pain-card">
-        <div class="pain-number">03</div>
-        <div class="pain-title">מסלול השקעה ברירת מחדל שלא מתאים לגיל שלך</div>
-        <div class="pain-desc">גיל 40 עם מסלול שמרני = הפסד תשואה מיותרת. בדיקה אחת יכולה לשנות את הסכום הסופי.</div>
+        <div class="pain-card-inner">
+          <div class="pain-badge">03</div>
+          <div class="pain-content">
+            <div class="pain-title">מסלול ברירת מחדל</div>
+            <div class="pain-sub">לא מתאים לגיל שלך</div>
+            <div class="pain-desc">גיל 40 + מסלול שמרני = <strong style="color:#f5c842;">הפסד תשואה שאפשר למנוע.</strong></div>
+          </div>
+        </div>
       </div>
+
       <div class="pain-card">
-        <div class="pain-number">04</div>
-        <div class="pain-title">זכויות שלא מימשת ולא ידעת שיש לך</div>
-        <div class="pain-desc">הטבות מס, זיכויים, כספי פיצויים &quot;תקועים&quot; בקרנות ישנות. לפעמים מדובר בסכומים גדולים.</div>
+        <div class="pain-card-inner">
+          <div class="pain-badge">04</div>
+          <div class="pain-content">
+            <div class="pain-title">זכויות שנעלמו</div>
+            <div class="pain-sub">לא ידעת שיש לך</div>
+            <div class="pain-desc">כספי פיצויים תקועים בקרנות ישנות. <strong style="color:#f5c842;">לפעמים מדובר בסכומים גדולים.</strong></div>
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -1273,7 +1318,7 @@ input[type="range"] {
 <!-- ══════════════════════════════ SIMULATORS ══════════════════════════════ -->
 <section class="sim-section">
   <div class="section-label">כמה הפנסיה שלכם שווה?</div>
-  <h2 class="section-title">חשבו — או תנו לנו<br>לעשות זאת</h2>
+  <h2 class="section-title" style="font-size:clamp(36px,8vw,54px); font-weight:900; line-height:1.1;">חשבו — או תנו לנו<br>לעשות זאת</h2>
 
   <!-- שתי נתיבות -->
   <div class="two-paths">
